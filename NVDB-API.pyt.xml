@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="nb">
+	<Esri>
+		<CreaDate>20180611</CreaDate>
+		<CreaTime>10274300</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<SyncOnce>TRUE</SyncOnce>
+		<ModDate>20190102</ModDate>
+		<ModTime>131714</ModTime>
+	</Esri>
+	<toolbox name="NVDB-API" alias="NVDB-API">
+		<arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.6\Help\gp</arcToolboxHelpPath>
+		<toolsets/>
+	</toolbox>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>NVDB-API</resTitle>
+		</idCitation>
+	</dataIdInfo>
+	<distInfo>
+		<distributor>
+			<distorFormat>
+				<formatName>ArcToolbox Toolbox</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+</metadata>

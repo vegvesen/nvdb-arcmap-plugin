@@ -1,0 +1,217 @@
+# TODO: Få oversikt over hvilke elementer som ikke er brukt og rydd opp i configen
+spatial_refs:
+    utm33: utm33fc
+
+baseurl: https://nvdbapiles-v2.atlas.vegvesen.no
+headers:
+    Accept: application/vnd.vegvesen.nvdb-v2+json
+
+metafile: test_meta_hdf5.h5
+profile_file: C:\Users\eivindn\TestOutputs\svv\profiling\nvdbstats_tool
+
+include_by_name:
+    vegObjektTyper: []
+    
+include_by_dbid:
+    vegObjektTyper: []
+
+exclude_by_name:
+    ['vegreferanse', 'driftskontrakter', 'kontraktsområder', 'posisjon', 'veg']
+
+# Her brukes nvdb-navn
+vegobjekt_exclude:
+    ['self',
+     'definisjon',
+     'assosiasjoner',
+     'geometriWgs84',
+     'geometriForenkletUtm33',
+     'geometriForenkletWgs84'
+    ]
+
+extract_bad_vals:
+    lokasjon_vegreferanser: ["\\", ""]
+
+extract_name_lut:
+    nvdb_geometri_wkt: 'SHAPE@WKT'
+    # nvdb_lokasjon_geometri_wkt: 'SHAPE@WKT' #Test
+
+# Her brukes feltnavn i ArcMap-fc
+extras_default:
+    id: nvdb_id # gamle nvdb_objektId
+    sistMod: nvdb_metadata_sist_modifisert #gamle nvdb_modifisert
+    geometri: 'SHAPE@WKT'
+    sluttDato: nvdb_metadata_sluttdato #TODO: Ikke i det nye apiet?
+
+response_keys:
+    ressurser: ressurser
+    ressurser.dbid: href
+    ressurser.uri: href
+    ressurser.name: navn
+    vegObjektType.objekter: objekter
+    vegObjektType.objekter.id: id
+    vegObjektType.objekter.uri: href
+    vegObjektType.metadata: metadata
+    vegObjektType.metadata.neste: neste
+    vegObjektType.metadata.neste.start: start
+    vegObjektType.metadata.antReturnert: returnert
+    vegObjektTyper: vegObjektTyper
+    vegObjektTyper.dbid: id
+    vegObjektTyper.self: self
+    vegObjektTyper.self.uri: href
+    vegObjektTyper.name: navn
+    vegObjektTyper.geometriType: geometriType
+    egenskapsTyper: egenskapstyper
+    egenskapsTyper.dbid: id
+    egenskapsTyper.self: self
+    egenskapsTyper.self.uri: uri
+    egenskapsTyper.name: navn
+    egenskapsTyper.type: datatype
+    egenskapsTyper.geometriType: stedfesting
+    vegObj: vegObjekter 
+    vegObj.uri: self
+    vegObj.modifisert: modifisert
+    vegObj.egskap: egenskaper
+    vegObj.egskap.datatype: datatype
+    vegObj.egskap.definisjon: definisjon
+    vegObj.egskap.definisjon.uri: uri
+    vegObj.egskap.navn: navn
+    vegObj.egskap.verdi: verdi
+    vegObj.egskap.enum.verdi: enum_id
+    vegObj.lok: lokasjon
+    vegObj.lok.fylke: fylke
+    vegObj.lok.kommune: kommune
+    vegObj.lok.region: region
+    vegObj.lok.pd: politiDistrikt
+    vegObj.lok.vegAvd: vegAvdeling
+    vegObj.lok.vegRef: vegReferanser
+    vegObj.lok.utm33: geometriUtm33 
+    vegObj.objektId: id
+    vegObj.versjonsId: versjonsId
+    sok.res: resultater
+    sok.totAntRet: totaltAntallReturnert
+    omrade.navn: navn
+    omrade.nummer: nummer
+    omrade.ruter: riksvegruter
+    omrade.ruter.periode: periode
+    omrade.beskriv: beskrivelse
+    egskap.beskriv: beskrivelse
+    egskap.eVerdi: tillatte_verdier
+    egskap.eVerdi.id: id
+    egskap.eVerdi.verdi: navn
+    egskap.navn: navn
+    egskap.id: id
+    ver.datakatalog: datakatalog
+    ver.ver: versjon
+    ver.date: dato
+    endre.cnt: count
+    endre.next: next
+    endre.trans: transactions
+    endre.trans.dato: dato
+    endre.trans.id: id
+    endre.trans.type: type
+    statistikk.antall: antall
+
+names:
+    # internt navn: nvdb-navn
+    vegobjekter: vegobjekter
+    sok: vegobjekter/{vegObjektTypeId}
+    statistikk: vegobjekter/{vegObjektTypeId}/statistikk
+    sokgrens: sokegrensesnitt
+    omrader: omrader
+    objekttyper: vegobjekttyper
+    regioner: regioner
+    fylker: fylker
+    riksvegruter: riksvegruter
+    version: status
+
+sok_exclude: [id]
+stat_exclude: [inkluder, antall, start, geometritoleranse, projeksjon, dybde, srid]
+sok_params:
+    inkluder: alle
+    segmentering: true
+    # segmentering: false
+
+lokasjonLut:
+    bbox: 'Bruk gjeldende kartutsnitt'
+    alle: 'Hele Landet'
+    bbox_pro: 'Bruk sist lagrede kartutsnitt'
+
+typer:
+    enum: [30, 31]
+    omrade: [regioner, fylker, vegavdelinger, kommuner, riksvegruter, kontraktsomrader]
+
+typerLut:
+    Tall: DOUBLE
+    Tekst: TEXT
+    Dato: DATE
+    KortDato: TEXT
+    Klokkeslett: TEXT # Vi lagrer klokkeslett som string, siden DATE inneholder år, mnd og dag men vi vet har ikke disse
+    ENUM: LONG
+    # Se link for oversikt over datatyper:
+    # https://www.vegvesen.no/nvdb/api/v2/vegobjekttyper/datatyper
+    1: TEXT
+    2: DOUBLE
+    8: DATE
+    9: TEXT # Vi lagrer KortDato som string
+    10: TEXT # Vi lagrer klokkeslett som string, siden DATE inneholder år, mnd og dag men vi vet har ikke disse
+    17: TEXT # Geom type
+    18: TEXT # Geom type
+    19: TEXT # Geom type
+    #20: null
+    #21: null
+    #22: null
+    #23: null
+    #24: null
+    #26: null
+    #27: null
+    #28: null
+    #29: null
+    # 30: TEXT # Text ENUM: TS 2019.06.20: Hvorfor LONG og ikke TEXT 
+    30: LONG # Text ENUM
+    31: LONG # Numeric ENUM
+    #32: null
+
+replaceTyperLut:
+    Double: DOUBLE
+    String: TEXT
+    Text: TEXT
+    Date: DATE
+    Long: LONG
+    Integer: LONG
+
+geomLut:
+    GeomPunkt: TEXT
+    
+geomTyperLut:
+    PUNKT: POINT
+    LINJE: POLYLINE
+    FLATE: POLYGON
+    null: none
+
+invGeomTyperLut:
+    POINT: PUNKT
+    POLYLINE: LINJE
+    POLYGON: FLATE
+    none: null 
+
+wktTyperLut:
+    POINT: POINT
+    POLYLINE: LINESTRING
+    POLYGON: POLYGON
+
+endreTyperLut:
+    delete: SLETTET
+
+wktEmpty: EMPTY
+
+time_fmt:
+    full_tz: '%Y-%m-%dT%H:%M:%S%z'
+    full: '%Y-%m-%dT%H:%M:%S'
+    date: '%Y-%m-%d'
+    time: '%H:%M:%S'
+
+try_fmts:
+    date_full: '%Y-%m-%dT%H:%M:%S+02:00'
+    date: '%Y-%m-%d'
+    #time: '%H:%M:%S'
+    #time2: '%H:%M'
