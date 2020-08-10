@@ -679,7 +679,7 @@ class HentData(BaseTool):
                     else:
                         # ArcGIS Pro
                         aprx = arcpy.mp.ArcGISProject("CURRENT")
-                        map = aprx.listMaps()[0]
+                        map = aprx.activeMap
                         extent = map.defaultCamera.getExtent()
                         del aprx, map
 

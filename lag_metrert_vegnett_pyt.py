@@ -363,7 +363,7 @@ class LagMetrertVegnett(BaseTool):
                 else:
                     # ArcGIS Pro
                     aprx = arcpy.mp.ArcGISProject("CURRENT")
-                    map = aprx.listMaps()[0]
+                    map = aprx.activeMap
                     extent = map.defaultCamera.getExtent()
                     del aprx, map
 
@@ -466,7 +466,7 @@ class LagMetrertVegnett(BaseTool):
             else:
                 # ArcGIS Pro
                 aprx = arcpy.mp.ArcGISProject("CURRENT")
-                map = aprx.listMaps()[0]
+                map = aprx.activeMap
                 lyrfil_navn = os.path.join(os.path.dirname(__file__), 'lyrfiler', u'Vegreferanse.lyr')
                 group_layer_name_old = u'{}_Vegkategorier'.format(out_fc)
                 group_layer_name = format(out_fc)
