@@ -1,8 +1,8 @@
 # FORELDET nvdb-arcmap-plugin
 
-# Denne plugin'en bruker versjon 2 av NVDB api, med gamle administrative grenser og gammelt vegreferansesystem. 
+# Denne plugin'en  er teknisk stein dau og foreldet
 
-Versjon 2 av NVDB api er **ikke** noe vi offisielt drifter [etter 1. august 2021](vegdata.no/info-utfasing-nvdb-klassisk/), men rent teknisk tar det kanskje litt tid før vi skrur det av. Plugin vi dermed rent tenkisk kunne fungere enda en stund. 
+Plugin bruker versjon 2 av NVDB api, med gamle administrative grenser og gammelt vegreferansesystem. Versjon 2 av NVDB api ble stengt ned høsten 2022. 
 
 Vi har ingen planer om å oppgradere denne plugin'en til versjon 3 av NVDB api, fordi den ikke fungerer på arcgis pro. Men det er selvsagt fritt frem for andre å kopiere koden og jobbe videre slik de ønsker.
 
